@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" role="img" aria-label="Blue screen">
+  <rect width="1920" height="1080" fill="#0078d7"/>
+  <g fill="#ffffff" font-family="Segoe UI, Arial, sans-serif">
+    <text x="180" y="250" font-size="150">:(</text>
+    <text x="180" y="385" font-size="44">Your PC ran into a problem and needs to restart.</text>
+    <text x="180" y="450" font-size="44">We're just collecting some error info, and then we'll restart for you.</text>
+    <text x="180" y="575" font-size="34">0% complete</text>
+    <text x="180" y="760" font-size="24">For more information about this issue and possible fixes, visit https://www.windows.com/stopcode</text>
+    <text x="180" y="825" font-size="24">Stop code: PANIC_TAB_TRIGGERED</text>
+  </g>
+</svg>

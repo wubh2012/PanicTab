@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PanicTab Options</title>
+    <link rel="stylesheet" href="options.css">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="header">
+        <div>
+          <p class="eyebrow">PanicTab</p>
+          <h1>设置</h1>
+        </div>
+        <button id="testButton" class="primary-button" type="button">打开伪装页</button>
+      </header>
+
+      <section class="section">
+        <label class="switch-row">
+          <span>
+            <strong>鼠标左键三连击触发</strong>
+            <small>默认关闭，仅在普通 http/https 网页中生效。</small>
+          </span>
+          <input id="tripleClickEnabled" type="checkbox">
+        </label>
+      </section>
+
+      <section class="section">
+        <h2>键盘快捷键</h2>
+        <p>
+          网页内默认是双击 <kbd>Ctrl</kbd>。特殊页面可继续使用 Chrome 原生命令，
+          在地址栏打开 <code>chrome://extensions/shortcuts</code> 修改。
+        </p>
+        <label class="switch-row compact">
+          <span>
+            <strong>启用网页内键盘触发</strong>
+            <small>仅在普通 http/https 网页中生效。</small>
+          </span>
+          <input id="keyboardTriggerEnabled" type="checkbox">
+        </label>
+        <div class="field">
+          <label for="keyboardShortcut">网页内快捷键</label>
+          <select id="keyboardShortcut">
+            <option value="doubleControl">双击 Ctrl</option>
+            <option value="doubleShift">双击 Shift</option>
+            <option value="doubleAlt">双击 Alt</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>标签分组</h2>
+        <div class="field">
+          <label for="groupName">分组名称</label>
+          <input id="groupName" type="text" maxlength="40" placeholder="PanicTab">
+        </div>
+        <div class="field">
+          <label for="groupColor">分组颜色</label>
+          <select id="groupColor">
+            <option value="grey">灰色</option>
+            <option value="blue">蓝色</option>
+            <option value="red">红色</option>
+            <option value="yellow">黄色</option>
+            <option value="green">绿色</option>
+            <option value="pink">粉色</option>
+            <option value="purple">紫色</option>
+            <option value="cyan">青色</option>
+            <option value="orange">橙色</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>伪装页面</h2>
+        <div class="field">
+          <label for="disguiseMode">默认显示</label>
+          <select id="disguiseMode">
+            <option value="crash">浏览器崩溃页</option>
+            <option value="image">自定义图片</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="imageUrl">远程图片 URL</label>
+          <input id="imageUrl" type="url" placeholder="https://example.com/blue-screen.png">
+        </div>
+
+        <div class="field">
+          <label for="imageUpload">上传本地图片</label>
+          <input id="imageUpload" type="file" accept="image/*">
+        </div>
+
+        <div class="button-row">
+          <button id="clearImageButton" type="button">清除图片</button>
+          <span id="status" role="status" aria-live="polite"></span>
+        </div>
+
+        <figure id="previewFrame" class="preview-frame" hidden>
+          <img id="imagePreview" alt="伪装图片预览">
+        </figure>
+      </section>
+    </main>
+
+    <script src="options.js"></script>
+  </body>
+</html>

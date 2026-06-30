@@ -1,0 +1,77 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #ffffff;
+  color: #3c4043;
+  font-family: Arial, "Microsoft YaHei", sans-serif;
+}
+
+.crash-view {
+  width: min(720px, calc(100vw - 48px));
+  margin: 16vh auto 0;
+}
+
+.crash-icon {
+  margin-bottom: 28px;
+  color: #9aa0a6;
+  font-size: 52px;
+  line-height: 1;
+}
+
+h1 {
+  margin: 0 0 14px;
+  color: #202124;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+p {
+  margin: 0 0 14px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.muted {
+  color: #5f6368;
+  font-size: 13px;
+}
+
+button {
+  min-height: 36px;
+  margin-top: 14px;
+  border: 1px solid #1a73e8;
+  border-radius: 4px;
+  padding: 8px 18px;
+  background: #1a73e8;
+  color: #ffffff;
+  cursor: pointer;
+  font: inherit;
+}
+
+button:hover {
+  background: #185abc;
+}
+
+.image-view {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #000000;
+}
+
+.image-view img {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  object-position: center center;
+}
