@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PanicTab Options</title>
+    <title data-i18n="optionsTitle">PanicTab Options</title>
     <link rel="stylesheet" href="options.css">
   </head>
   <body>
@@ -11,94 +11,129 @@
       <header class="header">
         <div>
           <p class="eyebrow">PanicTab</p>
-          <h1>设置</h1>
+          <h1 data-i18n="optionsHeading">设置</h1>
         </div>
-        <button id="testButton" class="primary-button" type="button">打开伪装页</button>
+        <button id="testButton" class="primary-button" type="button" data-i18n="optionsOpenDisguisePage">打开伪装页</button>
       </header>
+
+      <section class="section">
+        <div class="field">
+          <label for="uiLocale" data-i18n="optionsLanguageLabel">界面语言</label>
+          <select id="uiLocale">
+            <option value="auto" data-i18n="languageAuto">跟随浏览器</option>
+            <option value="zh_CN" data-i18n="languageZhCn">简体中文</option>
+            <option value="en" data-i18n="languageEn">English</option>
+            <option value="ja" data-i18n="languageJa">日本語</option>
+            <option value="ko" data-i18n="languageKo">한국어</option>
+            <option value="de" data-i18n="languageDe">Deutsch</option>
+            <option value="fr" data-i18n="languageFr">Français</option>
+          </select>
+          <small data-i18n="optionsLanguageHelp">仅切换扩展内页面语言；工具栏标题和扩展简介仍跟随 Chrome 语言。</small>
+        </div>
+      </section>
 
       <section class="section">
         <label class="switch-row">
           <span>
-            <strong>鼠标左键三连击触发</strong>
-            <small>默认关闭，仅在普通 http/https 网页中生效。</small>
+            <strong data-i18n="optionsTripleClickTitle">鼠标左键三连击触发</strong>
+            <small data-i18n="optionsTripleClickHelp">默认关闭，仅在普通 http/https 网页中生效。</small>
           </span>
           <input id="tripleClickEnabled" type="checkbox">
         </label>
       </section>
 
       <section class="section">
-        <h2>键盘快捷键</h2>
+        <h2 data-i18n="optionsKeyboardTitle">键盘快捷键</h2>
         <p>
-          网页内默认是双击 <kbd>Ctrl</kbd>。特殊页面可继续使用 Chrome 原生命令，
-          在地址栏打开 <code>chrome://extensions/shortcuts</code> 修改。
+          <span data-i18n="optionsKeyboardHintPrefix">网页内默认是双击</span> <kbd>Ctrl</kbd><span data-i18n="optionsKeyboardHintMiddle">。特殊页面可继续使用 Chrome 原生命令，在地址栏打开</span>
+          <code>chrome://extensions/shortcuts</code> <span data-i18n="optionsKeyboardHintSuffix">修改。</span>
         </p>
         <label class="switch-row compact">
           <span>
-            <strong>启用网页内键盘触发</strong>
-            <small>仅在普通 http/https 网页中生效。</small>
+            <strong data-i18n="optionsKeyboardTriggerTitle">启用网页内键盘触发</strong>
+            <small data-i18n="optionsHttpOnlyHelp">仅在普通 http/https 网页中生效。</small>
           </span>
           <input id="keyboardTriggerEnabled" type="checkbox">
         </label>
         <div class="field">
-          <label for="keyboardShortcut">网页内快捷键</label>
+          <label for="keyboardShortcut" data-i18n="optionsKeyboardShortcutLabel">网页内快捷键</label>
           <select id="keyboardShortcut">
-            <option value="doubleControl">双击 Ctrl</option>
-            <option value="doubleShift">双击 Shift</option>
-            <option value="doubleAlt">双击 Alt</option>
+            <option value="doubleControl" data-i18n="optionsShortcutDoubleControl">双击 Ctrl</option>
+            <option value="doubleShift" data-i18n="optionsShortcutDoubleShift">双击 Shift</option>
+            <option value="doubleAlt" data-i18n="optionsShortcutDoubleAlt">双击 Alt</option>
           </select>
         </div>
       </section>
 
       <section class="section">
-        <h2>标签分组</h2>
+        <h2 data-i18n="optionsTabGroupTitle">标签分组</h2>
         <div class="field">
-          <label for="groupName">分组名称</label>
+          <label for="groupName" data-i18n="optionsGroupNameLabel">分组名称</label>
           <input id="groupName" type="text" maxlength="40" placeholder="PanicTab">
         </div>
         <div class="field">
-          <label for="groupColor">分组颜色</label>
+          <label for="groupColor" data-i18n="optionsGroupColorLabel">分组颜色</label>
           <select id="groupColor">
-            <option value="grey">灰色</option>
-            <option value="blue">蓝色</option>
-            <option value="red">红色</option>
-            <option value="yellow">黄色</option>
-            <option value="green">绿色</option>
-            <option value="pink">粉色</option>
-            <option value="purple">紫色</option>
-            <option value="cyan">青色</option>
-            <option value="orange">橙色</option>
+            <option value="grey" data-i18n="colorGrey">灰色</option>
+            <option value="blue" data-i18n="colorBlue">蓝色</option>
+            <option value="red" data-i18n="colorRed">红色</option>
+            <option value="yellow" data-i18n="colorYellow">黄色</option>
+            <option value="green" data-i18n="colorGreen">绿色</option>
+            <option value="pink" data-i18n="colorPink">粉色</option>
+            <option value="purple" data-i18n="colorPurple">紫色</option>
+            <option value="cyan" data-i18n="colorCyan">青色</option>
+            <option value="orange" data-i18n="colorOrange">橙色</option>
           </select>
         </div>
       </section>
 
       <section class="section">
-        <h2>伪装页面</h2>
-        <div class="field">
-          <label for="disguiseMode">默认显示</label>
-          <select id="disguiseMode">
-            <option value="crash">浏览器崩溃页</option>
-            <option value="image">自定义图片</option>
-          </select>
+        <h2 data-i18n="optionsDisguisePageTitle">伪装页面</h2>
+
+        <div id="disguiseModeCards" class="mode-cards" role="radiogroup" aria-label="伪装页面类型" data-i18n-attr="aria-label:optionsDisguiseModeAria">
+          <button class="mode-card" type="button" data-mode="crash" role="radio" aria-checked="false">
+            <strong data-i18n="optionsModeCrashTitle">浏览器崩溃页</strong>
+            <span data-i18n="optionsModeCrashHelp">打开本地错误样式页面。</span>
+          </button>
+          <button class="mode-card" type="button" data-mode="image" role="radio" aria-checked="false">
+            <strong data-i18n="optionsModeImageTitle">自定义图片</strong>
+            <span data-i18n="optionsModeImageHelp">显示上传图片或远程图片。</span>
+          </button>
+          <button class="mode-card" type="button" data-mode="webpage" role="radio" aria-checked="false">
+            <strong data-i18n="optionsModeWebpageTitle">网页地址</strong>
+            <span data-i18n="optionsModeWebpageHelp">直接打开你设置的网址。</span>
+          </button>
         </div>
 
-        <div class="field">
-          <label for="imageUrl">远程图片 URL</label>
-          <input id="imageUrl" type="url" placeholder="https://example.com/blue-screen.png">
+        <div id="imageSettings" class="mode-settings" hidden>
+          <div class="field">
+            <label for="imageUrl" data-i18n="optionsImageUrlLabel">远程图片 URL</label>
+            <input id="imageUrl" type="url" placeholder="https://example.com/blue-screen.png" data-i18n-attr="placeholder:optionsImageUrlPlaceholder">
+          </div>
+
+          <div class="field">
+            <label for="imageUpload" data-i18n="optionsImageUploadLabel">上传本地图片</label>
+            <input id="imageUpload" type="file" accept="image/*">
+          </div>
+
+          <button id="clearImageButton" type="button" data-i18n="optionsClearImageButton">清除图片</button>
+
+          <figure id="previewFrame" class="preview-frame" hidden>
+            <img id="imagePreview" alt="伪装图片预览" data-i18n-attr="alt:optionsImagePreviewAlt">
+          </figure>
         </div>
 
-        <div class="field">
-          <label for="imageUpload">上传本地图片</label>
-          <input id="imageUpload" type="file" accept="image/*">
+        <div id="webpageSettings" class="mode-settings" hidden>
+          <div class="field">
+            <label for="webpageUrl" data-i18n="optionsWebpageUrlLabel">网页地址</label>
+            <input id="webpageUrl" type="url" placeholder="https://www.example.com" data-i18n-attr="placeholder:optionsWebpageUrlPlaceholder">
+            <small data-i18n="optionsWebpageUrlHelp">仅支持 http:// 或 https:// 地址。留空时会打开内置伪装页。</small>
+          </div>
         </div>
 
         <div class="button-row">
-          <button id="clearImageButton" type="button">清除图片</button>
           <span id="status" role="status" aria-live="polite"></span>
         </div>
-
-        <figure id="previewFrame" class="preview-frame" hidden>
-          <img id="imagePreview" alt="伪装图片预览">
-        </figure>
       </section>
     </main>
 

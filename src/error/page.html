@@ -3,20 +3,20 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Aw, Snap!</title>
+    <title data-i18n="errorPageTitle">Aw, Snap!</title>
     <link rel="stylesheet" href="page.css">
   </head>
   <body>
     <main id="crashView" class="crash-view">
       <div class="crash-icon" aria-hidden="true">:(</div>
-      <h1>Aw, Snap!</h1>
-      <p>Something went wrong while displaying this webpage.</p>
-      <p class="muted">Error code: STATUS_ACCESS_VIOLATION</p>
-      <button id="reloadButton" type="button">Reload</button>
+      <h1 data-i18n="errorPageHeading">Aw, Snap!</h1>
+      <p data-i18n="errorPageMessage">Something went wrong while displaying this webpage.</p>
+      <p class="muted" data-i18n="errorPageCode">Error code: STATUS_ACCESS_VIOLATION</p>
+      <button id="reloadButton" type="button" data-i18n="errorPageReload">Reload</button>
     </main>
 
     <main id="imageView" class="image-view" hidden>
-      <img id="customImage" alt="Disguise">
+      <img id="customImage" alt="Disguise" data-i18n-attr="alt:errorPageImageAlt">
     </main>
 
     <script src="page.js"></script>

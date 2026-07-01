@@ -9,34 +9,51 @@ const KEY_WINDOW_MS = 500;
 let clickTimes = [];
 let keyTimes = [];
 let activationInFlight = false;
+let extensionContextInvalidated = false;
 let settings = { ...DEFAULT_SETTINGS };
 
-chrome.storage.local.get(DEFAULT_SETTINGS).then((storedSettings) => {
-  settings = { ...DEFAULT_SETTINGS, ...storedSettings };
-});
+try {
+  chrome.storage.local
+    .get(DEFAULT_SETTINGS)
+    .then((storedSettings) => {
+      settings = { ...DEFAULT_SETTINGS, ...storedSettings };
+    })
+    .catch(handleExtensionContextError);
+} catch (error) {
+  handleExtensionContextError(error);
+}
 
-chrome.storage.onChanged.addListener((changes, areaName) => {
-  if (areaName !== "local") {
-    return;
-  }
+try {
+  chrome.storage.onChanged.addListener((changes, areaName) => {
+    if (areaName !== "local" || extensionContextInvalidated) {
+      return;
+    }
 
-  if (changes.tripleClickEnabled) {
-    settings.tripleClickEnabled = Boolean(changes.tripleClickEnabled.newValue);
-  }
+    if (changes.tripleClickEnabled) {
+      settings.tripleClickEnabled = Boolean(changes.tripleClickEnabled.newValue);
+    }
 
-  if (changes.keyboardTriggerEnabled) {
-    settings.keyboardTriggerEnabled = Boolean(changes.keyboardTriggerEnabled.newValue);
-  }
+    if (changes.keyboardTriggerEnabled) {
+      settings.keyboardTriggerEnabled = Boolean(changes.keyboardTriggerEnabled.newValue);
+    }
 
-  if (changes.keyboardShortcut) {
-    settings.keyboardShortcut = changes.keyboardShortcut.newValue || DEFAULT_SETTINGS.keyboardShortcut;
-  }
-});
+    if (changes.keyboardShortcut) {
+      settings.keyboardShortcut = changes.keyboardShortcut.newValue || DEFAULT_SETTINGS.keyboardShortcut;
+    }
+  });
+} catch (error) {
+  handleExtensionContextError(error);
+}
 
 document.addEventListener(
   "mousedown",
   (event) => {
-    if (!settings.tripleClickEnabled || event.button !== 0 || activationInFlight) {
+    if (
+      extensionContextInvalidated ||
+      !settings.tripleClickEnabled ||
+      event.button !== 0 ||
+      activationInFlight
+    ) {
       return;
     }
 
@@ -54,7 +71,12 @@ document.addEventListener(
 document.addEventListener(
   "keydown",
   (event) => {
-    if (!settings.keyboardTriggerEnabled || activationInFlight || event.repeat) {
+    if (
+      extensionContextInvalidated ||
+      !settings.keyboardTriggerEnabled ||
+      activationInFlight ||
+      event.repeat
+    ) {
       return;
     }
 
@@ -86,13 +108,50 @@ function matchesKeyboardShortcut(event) {
 }
 
 function activate() {
-  activationInFlight = true;
+  if (!isExtensionContextAvailable()) {
+    extensionContextInvalidated = true;
+    activationInFlight = false;
+    return;
+  }
 
-  chrome.runtime
-    .sendMessage({ type: "PANICTAB_ACTIVATE" })
+  activationInFlight = true;
+  let activationMessage;
+
+  try {
+    activationMessage = chrome.runtime.sendMessage({ type: "PANICTAB_ACTIVATE" });
+  } catch (error) {
+    handleExtensionContextError(error);
+    activationInFlight = false;
+    return;
+  }
+
+  Promise.resolve(activationMessage)
+    .catch(handleExtensionContextError)
     .finally(() => {
       window.setTimeout(() => {
         activationInFlight = false;
       }, Math.max(CLICK_WINDOW_MS, KEY_WINDOW_MS));
     });
+}
+
+function isExtensionContextAvailable() {
+  try {
+    return Boolean(chrome.runtime?.id) && !extensionContextInvalidated;
+  } catch (error) {
+    handleExtensionContextError(error);
+    return false;
+  }
+}
+
+function handleExtensionContextError(error) {
+  if (isExtensionContextInvalidatedError(error)) {
+    extensionContextInvalidated = true;
+    return;
+  }
+
+  console.error("PanicTab content script error:", error);
+}
+
+function isExtensionContextInvalidatedError(error) {
+  return String(error?.message || error).includes("Extension context invalidated");
 }

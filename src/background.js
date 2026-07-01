@@ -1,7 +1,9 @@
 const DISGUISE_PAGE_PATH = "src/error/page.html";
 const DEFAULT_SETTINGS = {
   groupName: "PanicTab",
-  groupColor: "red"
+  groupColor: "red",
+  disguiseMode: "crash",
+  webpageUrl: ""
 };
 const ALLOWED_GROUP_COLORS = new Set([
   "grey",
@@ -50,8 +52,9 @@ async function activatePanicTab(sourceWindowId) {
   const settings = await chrome.storage.local.get(DEFAULT_SETTINGS);
   const windowId = await resolveWindowId(sourceWindowId);
   const disguiseUrl = chrome.runtime.getURL(DISGUISE_PAGE_PATH);
+  const targetUrl = resolveDisguiseTargetUrl(settings, disguiseUrl);
   const tabs = await chrome.tabs.query({ windowId });
-  const tabsToGroup = tabs.filter((tab) => isCollectableTab(tab, disguiseUrl));
+  const tabsToGroup = tabs.filter((tab) => isCollectableTab(tab, disguiseUrl, targetUrl));
 
   if (tabsToGroup.length > 0) {
     const tabIds = tabsToGroup.map((tab) => tab.id).filter(Number.isInteger);
@@ -65,9 +68,17 @@ async function activatePanicTab(sourceWindowId) {
 
   await chrome.tabs.create({
     windowId,
-    url: disguiseUrl,
+    url: targetUrl,
     active: true
   });
+}
+
+function resolveDisguiseTargetUrl(settings, fallbackUrl) {
+  if (settings.disguiseMode !== "webpage") {
+    return fallbackUrl;
+  }
+
+  return sanitizeWebpageUrl(settings.webpageUrl) || fallbackUrl;
 }
 
 async function resolveWindowId(sourceWindowId) {
@@ -88,12 +99,12 @@ async function resolveWindowId(sourceWindowId) {
   return currentWindow.id;
 }
 
-function isCollectableTab(tab, disguiseUrl) {
+function isCollectableTab(tab, disguiseUrl, targetUrl) {
   if (!Number.isInteger(tab.id) || tab.pinned) {
     return false;
   }
 
-  if (!tab.url || tab.url.startsWith(disguiseUrl)) {
+  if (!tab.url || tab.url.startsWith(disguiseUrl) || tab.url === targetUrl) {
     return false;
   }
 
@@ -111,4 +122,13 @@ function sanitizeGroupName(groupName) {
 
 function sanitizeGroupColor(groupColor) {
   return ALLOWED_GROUP_COLORS.has(groupColor) ? groupColor : DEFAULT_SETTINGS.groupColor;
+}
+
+function sanitizeWebpageUrl(rawUrl) {
+  try {
+    const url = new URL(String(rawUrl || "").trim());
+    return url.protocol === "http:" || url.protocol === "https:" ? url.href : "";
+  } catch {
+    return "";
+  }
 }

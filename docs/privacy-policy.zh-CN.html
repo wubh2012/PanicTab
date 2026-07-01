@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PanicTab 隐私政策</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --text: #1f2933;
+      --muted: #667085;
+      --border: #d9e2ec;
+      --bg: #f7f9fc;
+      --paper: #ffffff;
+      --accent: #2563eb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    main {
+      width: min(880px, calc(100% - 32px));
+      margin: 40px auto;
+      padding: 40px;
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    h1,
+    h2 {
+      line-height: 1.25;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 32px;
+    }
+
+    h2 {
+      margin: 32px 0 12px;
+      font-size: 22px;
+    }
+
+    p,
+    ul {
+      margin: 0 0 16px;
+    }
+
+    ul {
+      padding-left: 1.4em;
+    }
+
+    code {
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: #eef2f7;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.94em;
+    }
+
+    a {
+      color: var(--accent);
+    }
+
+    .meta {
+      margin-bottom: 28px;
+      color: var(--muted);
+    }
+
+    .language-link {
+      margin-top: 32px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 640px) {
+      main {
+        margin: 0;
+        width: 100%;
+        min-height: 100vh;
+        padding: 28px 20px;
+        border: 0;
+        border-radius: 0;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>PanicTab 隐私政策</h1>
+    <p class="meta">生效日期：2026-07-01</p>
+
+    <p>PanicTab 是一款 Chrome 扩展，用于在用户主动触发时快速整理当前窗口标签页，并打开可自定义的遮挡页面。</p>
+
+    <h2>我们收集的数据</h2>
+    <p>PanicTab 不会收集、出售、共享或远程传输用户数据。</p>
+    <p>扩展会在浏览器本地保存以下设置：</p>
+    <ul>
+      <li>鼠标三连击触发是否启用</li>
+      <li>网页内键盘触发是否启用</li>
+      <li>网页内键盘触发方式</li>
+      <li>标签组名称</li>
+      <li>标签组颜色</li>
+      <li>遮挡页面类型</li>
+      <li>界面语言偏好</li>
+      <li>用户填写的远程图片 URL</li>
+      <li>用户填写的伪装网页地址</li>
+      <li>用户上传的本地图片数据</li>
+    </ul>
+    <p>这些设置仅保存在用户本机浏览器的 <code>chrome.storage.local</code> 中。</p>
+
+    <h2>权限用途</h2>
+    <p>PanicTab 使用 <code>tabs</code> 权限读取当前窗口中的标签页，以便在用户主动触发时将标签页归入同一个标签组。</p>
+    <p>PanicTab 使用 <code>tabGroups</code> 权限创建和更新 Chrome 标签组，包括设置标签组名称、颜色和折叠状态。</p>
+    <p>PanicTab 使用 <code>storage</code> 权限在浏览器本地保存用户设置。</p>
+    <p>PanicTab 使用 <code>http://*/*</code> 和 <code>https://*/*</code> 主机权限在普通网页中运行内容脚本，用于监听用户主动配置的鼠标三连击和网页内键盘触发。内容脚本不读取网页正文，不分析页面内容，也不会上传页面数据。</p>
+
+    <h2>数据共享</h2>
+    <p>PanicTab 不会将用户数据传输给开发者或任何第三方。</p>
+    <p>如果用户主动填写远程图片 URL，浏览器会向该 URL 所属服务器请求图片。如果用户主动填写伪装网页地址并选择该模式，浏览器会直接访问该网页。上述请求不由 PanicTab 服务器处理，因为 PanicTab 不提供远程服务器。</p>
+
+    <h2>广告与追踪</h2>
+    <p>PanicTab 不包含广告，不进行个性化广告投放，不进行跨站追踪。</p>
+
+    <h2>Limited Use 声明</h2>
+    <p>PanicTab 对信息的使用遵守 Chrome Web Store User Data Policy，包括 Limited Use 要求。PanicTab 仅将权限和本地数据用于提供或改进扩展的单一用途：在用户主动触发时整理当前窗口标签页并打开用户配置的遮挡页面。</p>
+
+    <h2>联系方式</h2>
+    <p>如有隐私相关问题，请联系：<a href="mailto:jxxiaobian@gmail.com">jxxiaobian@gmail.com</a></p>
+
+    <p class="language-link">English version: <a href="./privacy-policy.en.html">Privacy Policy</a></p>
+  </main>
+</body>
+</html>
